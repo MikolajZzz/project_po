@@ -1,15 +1,27 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import funkcje.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        int choice=1;
+        while(true) {
+            choice = Menu.startMenu();
+            if (choice==0){
+                break;
+            }
+            switch (choice) {
+                case 1:
+                    choice = Menu.startMenu();
+                    break;
+                case 2:
+                    System.out.println("Logowanie pracownika...");
+                    break;
+                case 3:
+                    System.out.println("Tworzenie konta klienta...");
+                    break;
+                default:
+                    System.out.println("Błąd: nieprawidłowy wybór.");
+            }
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
         }
     }
 }
