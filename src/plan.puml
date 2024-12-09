@@ -1,0 +1,49 @@
+@startuml
+actor Klient
+actor SystemPracowniczy
+
+' Bazy danych
+database "Baza Danych Kont" as BazaKont
+database "Baza Danych Magazynu" as BazaMagazyn
+database "Baza Danych Złożonych Zamówień" as BazaZamowienia
+
+' Klient interakcje
+Klient --> (Logowanie)
+(Logowanie) --> BazaKont : Odczyt danych logowania
+
+Klient --> (Stwórz Konto)
+(Stwórz Konto) --> BazaKont : Zapis nowego konta
+
+Klient --> (Przeglądaj Asortyment)
+(Przeglądaj Asortyment) --> BazaMagazyn : Odczyt danych produktów
+
+Klient --> (Złóż Zamówienie)
+(Złóż Zamówienie) --> BazaMagazyn : Sprawdzenie dostępności produktów
+(Złóż Zamówienie) --> BazaZamowienia : Zapis zamówienia
+
+Klient --> (Pokaż Sumę Zamówienia)
+(Pokaż Sumę Zamówienia) --> BazaZamowienia : Odczyt ceny zamówienia
+
+' System Pracowniczy interakcje
+SystemPracowniczy --> (Logowanie)
+(Logowanie) --> BazaKont : Odczyt danych logowania
+
+SystemPracowniczy --> (Przeglądaj Asortyment)
+(Przeglądaj Asortyment) --> BazaMagazyn : Odczyt danych produktów
+
+SystemPracowniczy --> (Dodaj Asortyment)
+(Dodaj Asortyment) --> BazaMagazyn : Dodanie nowego produktu
+
+SystemPracowniczy --> (Usuń Asortyment)
+(Usuń Asortyment) --> BazaMagazyn : Usunięcie produktu
+
+SystemPracowniczy --> (Wydaj Zamówienie)
+(Wydaj Zamówienie) --> BazaZamowienia : Aktualizacja statusu zamówienia
+(Wydaj Zamówienie) --> BazaMagazyn : Aktualizacja ilości produktów
+
+SystemPracowniczy --> (Odrzuć Zamówienie)
+(Odrzuć Zamówienie) --> BazaZamowienia : Aktualizacja statusu zamówienia
+
+SystemPracowniczy --> (Zarządzaj Kontami Klientów)
+(Zarządzaj Kontami Klientów) --> BazaKont : Modyfikacja/usunięcie kont klientów
+@enduml
