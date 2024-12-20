@@ -1,16 +1,23 @@
 import funkcje.*;
 
+
 public class Main {
     public static void main(String[] args) {
-        int choice=1;
-        while(true) {
+        int choice;
+        while (true) {
             choice = Menu.startMenu();
-            if (choice==0){
+            if (choice == -1) { // Exit condition
+                System.out.println("Dziękujemy za skorzystanie z programu. Do widzenia!");
                 break;
             }
+
             switch (choice) {
                 case 1:
-                    choice = Menu.startMenu();
+                    int id=Menu.logowanie_klienta();
+                    if (id == -1) {
+                        choice=0;
+                    }
+                    System.out.println(id);
                     break;
                 case 2:
                     System.out.println("Logowanie pracownika...");
@@ -19,9 +26,8 @@ public class Main {
                     System.out.println("Tworzenie konta klienta...");
                     break;
                 default:
-                    System.out.println("Błąd: nieprawidłowy wybór.");
+                    System.out.println("Błąd: nieprawidłowy wybór."); // Should not occur
             }
-
         }
     }
 }
